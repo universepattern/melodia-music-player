@@ -3,256 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MELODIA | Music Web App</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>MELODIA PLAYER</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- jsmediatags for ID3 parsing -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
 </head>
 <body>
 
 <div class="bg" id="bg"></div>
-<div class="night-scene" id="nightScene"><div class="stars stars1"></div><div class="stars stars2"></div><div class="stars stars3"></div></div>
+<div class="night-scene" id="nightScene">
+  <div class="stars stars1"></div>
+  <div class="stars stars2"></div>
+  <div class="stars stars3"></div>
+</div>
 <div class="bg-blur" id="bgBlur"></div>
+<div class="bg-grain"></div>
+<div class="bg-vig"></div>
 <div class="petals" id="petals"></div>
 <div class="drop-ring" id="dropRing">✦ drop files or folders ✦</div>
 
-<!-- App Layout -->
-<div class="app-layout">
-  
-  <!-- Left Sidebar -->
-  <aside class="sidebar-left">
-    <div class="logo">MELODIA</div>
-    
-    <nav class="nav-menu">
-      <div class="nav-item active">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        Home
-      </div>
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        Search
-      </div>
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13.4a.5.5 0 0 1 .49.6l-1.35 6.75a1 1 0 0 1-.98.8H10"></path><path d="M4 19a2 2 0 0 0 2 2h14"></path><path d="M4 19h14"></path></svg>
-        Your Library
-      </div>
-    </nav>
+<div class="stage" id="stage">
 
-    <nav class="nav-menu mt-auto">
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-        Playlists
-      </div>
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        Artist
-      </div>
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        Create
-      </div>
-    </nav>
-  </aside>
-
-  <!-- Center Main Content -->
-  <main class="main-content">
-    <header class="top-bar">
-      <div class="nav-arrows">
-        <button>&lt;</button>
-        <button>&gt;</button>
-      </div>
-      <div class="search-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <span>Search</span>
-      </div>
-      <div class="user-profile">
-        <button class="icon-btn-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class="badge">4</span></button>
-        <div class="avatar">A</div>
-      </div>
-    </header>
-
-    <div class="scroll-area">
-      <!-- Hero -->
-      <div class="hero-section">
-        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1542103749-8ef59b94f47e?auto=format&fit=crop&w=1000&q=80');"></div>
-        <div class="hero-content">
-          <span class="tag">PLAYLIST</span>
-          <h1>Evening Chill</h1>
-          <p>Playlist 'n warm, atmospheric love</p>
-          <button class="hero-play-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Playlist
-          </button>
-        </div>
-      </div>
-
-      <!-- Grids -->
-      <div class="grid-layout">
-        <!-- Recently Played -->
-        <div class="grid-section">
-          <h2>Recently Played</h2>
-          <div class="cards-row">
-            <div class="media-card">
-              <div class="mc-img" style="background-image: url('https://images.unsplash.com/photo-1507676184212-d0330a15233c?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="mc-title">Sunset Drive</div>
-              <div class="mc-sub">Sunset Drive</div>
-            </div>
-            <div class="media-card">
-              <div class="mc-img" style="background-image: url('https://images.unsplash.com/photo-1445217143695-467124038776?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="mc-title">Midnight Echoes</div>
-              <div class="mc-sub">Midnight Echoes</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- New Releases -->
-        <div class="grid-section">
-          <h2>New Releases</h2>
-          <div class="cards-row">
-            <div class="media-card">
-              <div class="mc-img" style="background-image: url('https://images.unsplash.com/photo-1517488629431-6427e02d7263?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="mc-title">Aura</div>
-              <div class="mc-sub">Aura</div>
-            </div>
-            <div class="media-card">
-              <div class="mc-img" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a1a2a5f5f928?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="mc-title">Groove Theory</div>
-              <div class="mc-sub">Groove Theory</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid-section mt-lg">
-        <h2>Featured Playlists</h2>
-        <div class="cards-row feature-row">
-           <div class="media-card wide">
-              <div class="mc-img" style="background-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="mc-info">
-                <div class="mc-title">Warm Beats</div>
-                <div class="mc-sub">Warm Beats</div>
-              </div>
-            </div>
-            <div class="media-card wide">
-              <div class="mc-img" style="background-image: url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=300&q=80');"></div>
-              <div class="mc-info">
-                <div class="mc-title">Jazz Cafe</div>
-                <div class="mc-sub">Jazz Cafe</div>
-              </div>
-            </div>
-        </div>
-      </div>
+  <!-- ── PLAYER CARD ── -->
+  <div class="card" id="card">
+    <div class="card-header">
+      <button class="icon-btn" id="themeBtn" title="Change Theme">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+      </button>
+      <button class="icon-btn" id="miniBtn" title="Toggle Mini Player">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      </button>
     </div>
-  </main>
 
-  <!-- Right Sidebar (Player & Queue) -->
-  <aside class="sidebar-right" id="stage">
-    
-    <!-- PLAYER CARD -->
-    <div class="card" id="card">
-      <div class="card-header" style="display:none;">
-        <button id="themeBtn"></button><button id="miniBtn"></button>
-      </div>
-
-      <!-- ALBUM ART (replaces oil disc layout) -->
-      <div class="album-art-wrap">
-        <div id="discPin" class="album-cover">
-          <!-- We keep oil canvas for the visualization but clip it inside the square! -->
+    <!-- OIL DISC -->
+    <div class="disc-section">
+      <div class="disc-wrap">
+        <div class="disc-halo" id="discHalo"></div>
+        <div class="disc-ring">
           <canvas id="oilCanvas" width="280" height="280"></canvas>
         </div>
-        <div id="discHalo" style="display:none;"></div>
-        <div id="needle" style="display:none;"><div class="needle-ball"></div><div class="needle-arm"></div></div>
-      </div>
-
-      <!-- TRACK INFO -->
-      <div class="track-info">
-        <div class="track-header">
-          <div class="track-titles">
-            <div class="track-name idle" id="tName">Drop Music Here</div>
-            <div class="track-sub">
-              <span id="tArtist">MELODIA</span>
-              <span class="fmt-badge" id="tFmt" style="display:none;">MP3</span>
-            </div>
-          </div>
-          <button class="heart-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+        <div class="disc-pin" id="discPin"></div>
+        <div class="needle" id="needle">
+          <div class="needle-ball"></div>
+          <div class="needle-arm"></div>
         </div>
       </div>
-
-      <!-- WAVEFORM -->
-      <div class="wave-wrap" id="waveWrap">
-        <canvas id="waveCanvas"></canvas>
-        <!-- Custom handle for seek bar aesthetic -->
-        <div class="wave-handle"></div>
-      </div>
-      <div class="time-row">
-        <span class="time-val now" id="tCur">0:00</span>
-        <span class="time-val" id="tTot">0:00</span>
-      </div>
-
-      <!-- CONTROLS -->
-      <div class="ctrl-row">
-        <button class="ctrl" id="shuffleBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
-        </button>
-        <button class="ctrl" id="prevBtn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-        </button>
-        <button class="play-btn" id="playBtn">
-          <svg id="playIco" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </button>
-        <button class="ctrl" id="nextBtn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-        </button>
-        <button class="ctrl" id="repeatBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-        </button>
-      </div>
-
-      <!-- BOTTOM ROW / VOLUME -->
-      <div class="vol-row mt-3">
-        <span class="vol-icon" id="muteBtn">
-          <svg id="volIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-        </span>
-        <input type="range" class="vol" id="volSlider" min="0" max="100" value="75">
-        <span class="vol-pct" id="volPct" style="display:none;">75%</span>
-        
-        <button class="pill ml-auto" id="folderBtn" title="Open Folder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-        </button>
-        <button class="pill" id="openBtn" title="Open Files">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        </button>
-      </div>
-      
-      <div class="toast" id="toast"></div>
     </div>
 
-    <!-- QUEUE & FRIENDS -->
-    <div class="sidebar-panels">
-      <div class="sidebar" id="sidebar">
-        <div class="sb-head">
-          <span class="sb-title">Queue</span>
-          <div class="sb-meta">
-            <span class="sb-count" id="sbCount">0 tracks</span>
-            <button class="sb-clear" id="clearBtn" title="Clear queue">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-            </button>
-          </div>
-        </div>
-        <ul class="queue-list" id="queueList">
-          <li class="queue-empty">Add queue...<br>open a folder or drop files</li>
-        </ul>
-      </div>
-
-      <div class="friend-activity">
-        <div class="sb-head">
-          <span class="sb-title">Friend Activity</span>
-          <button class="sb-clear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
-        </div>
-        <div class="fa-empty">Connect with friends to see what they are listening to.</div>
+    <!-- TRACK INFO -->
+    <div class="track-info">
+      <div class="track-name idle" id="tName">drop your music ♪</div>
+      <div class="track-sub">
+        <span id="tArtist">melodia player</span>
+        <span class="fmt-badge" id="tFmt">MP3</span>
       </div>
     </div>
-  </aside>
+
+    <!-- WAVEFORM -->
+    <div class="wave-wrap" id="waveWrap">
+      <canvas id="waveCanvas"></canvas>
+    </div>
+    <div class="time-row">
+      <span class="time-val now" id="tCur">0:00</span>
+      <span class="time-val"     id="tTot">0:00</span>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="ctrl-row">
+      <button class="ctrl" id="shuffleBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+          <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+        </svg>
+      </button>
+      <button class="ctrl" id="prevBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="19 20 9 12 19 4 19 20" fill="currentColor" stroke="none"/><line x1="5" y1="19" x2="5" y2="5"/>
+        </svg>
+      </button>
+      <button class="play-btn" id="playBtn">
+        <svg id="playIco" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <button class="ctrl" id="nextBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 4 15 12 5 20 5 4" fill="currentColor" stroke="none"/><line x1="19" y1="5" x2="19" y2="19"/>
+        </svg>
+      </button>
+      <button class="ctrl" id="repeatBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- VOLUME -->
+    <div class="vol-row">
+      <span class="vol-icon" id="muteBtn">
+        <svg id="volIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+      </span>
+      <input type="range" class="vol" id="volSlider" min="0" max="100" value="75">
+      <span class="vol-pct" id="volPct">75%</span>
+    </div>
+
+    <!-- BOTTOM BUTTONS -->
+    <div class="bottom-row">
+      <button class="pill pill-folder" id="folderBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+        Folder
+      </button>
+      <button class="pill pill-files" id="openBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        Files
+      </button>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <!-- ── SIDEBAR QUEUE ── -->
+  <div class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <span class="sb-title">Queue</span>
+      <div class="sb-meta">
+        <span class="sb-count" id="sbCount">0 tracks</span>
+        <button class="sb-clear" id="clearBtn" title="Clear queue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6M14 11v6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <ul class="queue-list" id="queueList">
+      <li class="queue-empty">nothing here yet<br>open a folder or drop files ♪</li>
+    </ul>
+  </div>
+
 </div>
 
 <input type="file" id="fileInput" multiple accept=".mp3,.flac,.wav,.ogg,.aac,.m4a,.opus,.wma,.aiff,.alac">
